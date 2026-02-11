@@ -25,5 +25,15 @@ app.get('/api/data', (req: Request, res: Response) => {
     res.json(etudiants);
 })
 
+app.get('/api/hello/:name', (req: Request, res: Response) => {
+    const name = req.params.name as string ;
+
+    const response = {
+        message: `Bonjour ${name}`,
+        timestamp: new Date()
+    };
+    res.json(response);
+})
+
 let message = greet("Ethan");
 console.log(message); // Affiche: Hello, Ethan!
