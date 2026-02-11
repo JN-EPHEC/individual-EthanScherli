@@ -15,5 +15,15 @@ function greet(name: string): string {
     return `Hello, ${name}!`;
 }
 
+const etudiants = [
+    {id: 1, nom: "Dupont", prenom: "Jean"},
+    {id: 2, nom: "Martin", prenom: "Sophie"},
+    {id: 3, nom: "Doe", prenom: "John"}
+];
+
+app.get('/api/data', (req: Request, res: Response) => {
+    res.json(etudiants);
+})
+
 let message = greet("Ethan");
 console.log(message); // Affiche: Hello, Ethan!
