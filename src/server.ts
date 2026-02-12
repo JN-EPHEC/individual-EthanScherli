@@ -1,5 +1,8 @@
 import express, { Request, Response } from 'express';
 import userRouter from './routes/userRoutes.js';
+import { Sequelize } from "sequelize";
+import sequelize from './config/database.js';
+
 
 const app = express();
 const port = 3000;
@@ -40,3 +43,10 @@ app.get('/api/hello/:name', (req: Request, res: Response) => {
 
 let message = greet("Ethan");
 console.log(message); // Affiche: Hello, Ethan!
+
+try {
+    sequelize.authenticate();
+    console.log('Travail Terminé');
+} catch (error) {
+    console.error('Problème chef', error)
+}
