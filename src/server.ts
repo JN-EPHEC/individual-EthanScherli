@@ -13,9 +13,7 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Hello World!');
 });
 
-app.listen(port, () => {
-  console.log(`Serveur lancé sur http://localhost:${port}`);
-});
+
 
 function greet(name: string): string {
     return `Hello, ${name}!`;
@@ -44,9 +42,18 @@ app.get('/api/hello/:name', (req: Request, res: Response) => {
 let message = greet("Ethan");
 console.log(message); // Affiche: Hello, Ethan!
 
-try {
+/*try {
     sequelize.authenticate();
     console.log('Travail Terminé');
 } catch (error) {
     console.error('Problème chef', error)
-}
+*/
+
+sequelize.sync().then(() => {
+    console.log('Base de données synchronisée')
+    app.listen(port, () => {
+        console.log(`Serveur lancé sur http://localhost:${port}`);
+    });
+});
+
+

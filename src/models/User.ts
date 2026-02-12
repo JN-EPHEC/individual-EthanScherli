@@ -1,0 +1,22 @@
+import { DataTypes, Model, Sequelize } from "sequelize";
+import sequelize from "../config/database";
+
+class User extends Model {} 
+
+User.init(
+    {
+        prenom : {
+            type : DataTypes.STRING,
+            allowNull: false,
+        },
+        nom: {
+            type: DataTypes.STRING,
+        },
+    },
+    {
+        sequelize,
+        modelName : 'User',
+    },
+);
+
+export default User;
