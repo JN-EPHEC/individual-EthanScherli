@@ -10,6 +10,7 @@ app.use(express.json())
 const port = 3000;
 
 app.use('/api/users', userRouter);
+app.use(express.static('public'));
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello World!');
