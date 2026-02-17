@@ -6,6 +6,7 @@ import User from './models/User';
 
 console.log("Chargement du modèle :", User.name)
 const app = express();
+app.use(express.json())
 const port = 3000;
 
 app.use('/api/users', userRouter);
