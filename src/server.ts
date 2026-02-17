@@ -2,8 +2,9 @@ import express, { Request, Response } from 'express';
 import userRouter from './routes/userRoutes.js';
 import { Sequelize } from "sequelize";
 import sequelize from './config/database.js';
+import User from './models/User';
 
-
+console.log("Chargement du modèle :", User.name)
 const app = express();
 const port = 3000;
 
