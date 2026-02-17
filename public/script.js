@@ -60,3 +60,5 @@ async function deleteUser(id) {
 }
 
 fetchUsers();
+
+// Test pour la branche homework_1
