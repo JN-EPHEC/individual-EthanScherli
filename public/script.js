@@ -11,7 +11,7 @@ async function fetchUsers() { // utilisation de async pour pouvoir utiliser awai
             const li = document.createElement('li');
             li.className ="list-group-item d-flex justify-content-between align-items-center";
             const textSpan = document.createElement('span');
-            textSpan.textContent = `${user.prenom} ${user.nom}`;;
+            textSpan.textContent = `${user.prenom} ${user.nom} ${user.email}`;;
 
             const deleteBtn = document.createElement('button');
             deleteBtn.textContent = "X";
@@ -32,12 +32,13 @@ form.addEventListener('submit', async (event) => {
 
     const nom = document.getElementById('nom').value;
     const prenom = document.getElementById('prenom').value;
+    const email = document.getElementById('email').value;
 
     try {
         await fetch('/api/users', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ nom, prenom })
+            body: JSON.stringify({ nom, prenom, email})
         });
 
         fetchUsers();

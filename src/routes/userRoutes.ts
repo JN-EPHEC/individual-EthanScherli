@@ -30,6 +30,38 @@ router.delete('/:id', async (req: Request, res: Response) => {
     }
 });
 
+router.get('/search/:email', async (req: Request, res: Response) => {
+    try {
+        const user = await User.findOne({ where: { email: req.params.email } });
+        if (!user) {
+            return res.status(404).json({ error: "Utilisateur non trouvé" });
+        }
+        res.json(user);
+    } catch (error) {
+        res.status(500).json({ error: "Erreur recherche" });
+    }
+});
+
+router.post('/', async (req: Request, res: Response) => {
+    try {
+        const { nom, prenom, email } = req.body;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!email || !emailRegex.test(email)) {
+            return res.status(400).json({ error: "Format d'email invalide" });
+        }
+
+        if (!nom || !prenom) {
+            return res.status(400).json({ error: "Nom et Prénom sont obligatoires" });
+        }
+
+        const newUser = await User.create({ nom, prenom, email });
+        res.status(201).json(newUser);
+    } catch (error) {
+        res.status(400).json({ error: "Erreur lors de la création (Email déjà utilisé ?)" });
+    }
+});
+
 export default router;
 
 /*import {Router, Request, Response } from 'express';
