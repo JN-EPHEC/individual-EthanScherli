@@ -3,10 +3,12 @@ import userRouter from './routes/userRoutes.js';
 import { Sequelize } from "sequelize";
 import sequelize from './config/database.js';
 import User from './models/User';
+import { requestLogger } from './middlewares/logger';
 
 console.log("Chargement du modèle :", User.name)
 const app = express();
-app.use(express.json())
+app.use(express.json());
+app.use(requestLogger);
 const port = 3000;
 
 app.use('/api/users', userRouter);
