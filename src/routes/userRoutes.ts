@@ -29,7 +29,7 @@ router.get("/", userController.getAllUsers)
 router.post("/", userController.createUsers)
 /**
 * @swagger
-* /api/users:
+* /api/users/{:id}:
 *  delete:
 *    summary: Supprime un utilisateur sur base de l'id
 *    tags: [Users]
