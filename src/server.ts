@@ -4,6 +4,7 @@ import { Sequelize } from "sequelize";
 import sequelize from './config/database.js';
 import User from './models/User';
 import { requestLogger } from './middlewares/logger';
+import { errorHandler } from './middlewares/errorHandler';
 
 console.log("Chargement du modèle :", User.name)
 const app = express();
@@ -53,7 +54,7 @@ console.log(message); // Affiche: Hello, Ethan!
 } catch (error) {
     console.error('Problème chef', error)
 */
-
+app.use(errorHandler);
 sequelize.sync().then(() => {
     console.log('Base de données synchronisée')
     app.listen(port, () => {
