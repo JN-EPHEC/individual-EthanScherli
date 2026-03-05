@@ -5,9 +5,14 @@ import sequelize from './config/database.js';
 import User from './models/User';
 import { requestLogger } from './middlewares/logger';
 import { errorHandler } from './middlewares/errorHandler';
+import swaggerUi from "swagger-ui-express";
+import { swaggerSpec } from "./config/swagger";
+import cors from 'cors';
 
 console.log("Chargement du modèle :", User.name)
 const app = express();
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use(cors());
 app.use(express.json());
 app.use(requestLogger);
 const port = 3000;

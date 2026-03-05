@@ -5,7 +5,17 @@ import * as userController from '../controllers/userController';
 
 
 const router = Router();
-
+/**
+* @swagger
+* /api/users:
+*  get:
+*    summary: Récupère la liste des utilisateurs
+*    tags: [Users]
+*    responses:
+*      200:
+*      description: Succès
+*/
+router.get('/', userController.getAllUsers);
 router.get("/", userController.getAllUsers)
 router.post("/", userController.createUsers)
 router.delete("/:id", userController.deleteUsers)
