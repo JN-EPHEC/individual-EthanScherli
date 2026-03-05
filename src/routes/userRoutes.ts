@@ -1,6 +1,7 @@
 import { Router} from 'express';
 import User from '../models/User'; // Le nouveau : Import du modèle DB
 import * as userController from '../controllers/userController';
+import { checkIdParam } from '../middlewares/checkIdParams';
 
 
 
@@ -17,27 +18,49 @@ const router = Router();
 */
 router.get("/", userController.getAllUsers)
 /**
-* @swagger
-* /api/users:
-*  post:
-*    summary: Crée un utilisateur
-*    tags: [Users]
-*    responses:
-*      200:
-*      description: Succès
-*/
+ * @swagger
+ * /api/users:
+ *   post:
+ *     summary: Crée un nouvel utilisateur
+ *     tags: [Users]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               nom:
+ *                 type: string
+ *               prenom:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Utilisateur créé avec succès
+ *       400:
+ *         description: Erreur dans les données envoyées
+ */
 router.post("/", userController.createUsers)
 /**
-* @swagger
-* /api/users/{:id}:
-*  delete:
-*    summary: Supprime un utilisateur sur base de l'id
-*    tags: [Users]
-*    responses:
-*      200:
-*      description: Succès
-*/
-router.delete("/:id", userController.deleteUsers)
+ * @swagger
+ * /api/users/{id}:
+ *   delete:
+ *     summary: Supprime un utilisateur via son ID
+ *     tags: [Users]
+ *     parameters:
+ *        - in: path
+ *          name: id
+ *          required: true
+ *          schema:
+ *            type: integer
+ *          description: L'ID de l'utilisateur à supprimer
+ *     responses:
+ *       200:
+ *         description: Utilisateur supprimé
+ *       400:
+ *         description: ID invalide
+ */
+router.delete("/:id",checkIdParam , userController.deleteUsers)
 
 export default router;
 /*
