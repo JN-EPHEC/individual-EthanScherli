@@ -15,9 +15,28 @@ const router = Router();
 *      200:
 *      description: Succès
 */
-router.get('/', userController.getAllUsers);
 router.get("/", userController.getAllUsers)
+/**
+* @swagger
+* /api/users:
+*  post:
+*    summary: Crée un utilisateur
+*    tags: [Users]
+*    responses:
+*      200:
+*      description: Succès
+*/
 router.post("/", userController.createUsers)
+/**
+* @swagger
+* /api/users:
+*  delete:
+*    summary: Supprime un utilisateur sur base de l'id
+*    tags: [Users]
+*    responses:
+*      200:
+*      description: Succès
+*/
 router.delete("/:id", userController.deleteUsers)
 
 export default router;
