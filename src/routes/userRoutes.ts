@@ -1,8 +1,17 @@
-import { Router, Request, Response } from 'express';
+import { Router} from 'express';
 import User from '../models/User'; // Le nouveau : Import du modèle DB
+import * as userController from '../controllers/userController';
+
+
 
 const router = Router();
 
+router.get("/", userController.getAllUsers)
+router.post("/", userController.createUsers)
+router.delete("/:id", userController.deleteUsers)
+
+export default router;
+/*
 router.get('/', async (req: Request, res: Response) => {
     try {
         const users = await User.findAll();
@@ -29,21 +38,6 @@ router.delete('/:id', async (req: Request, res: Response) => {
         res.status(500).json({ error: "Erreur suppression" });
     }
 });
-
-export default router;
-
-/*import {Router, Request, Response } from 'express';
-const router = Router();
-
-const users = [
-    { id: 1, name: "Alice" },
-    { id: 2, name: "Bob" },
-];
-
-router.get('/', (req: Request, res: Response) => {
-    res.json(users);
-});
-
-export default router;
-
 */
+
+
