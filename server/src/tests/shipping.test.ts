@@ -10,14 +10,11 @@ describe('Shipping Calculator - Tests Fonctionnels (Catalog-Based)', () => {
     [51, 5, 'standard', 25, 'Distance 51 km -> Prix 25€ (standard)'],
     [500, 5, 'standard', 25, 'Distance 500 km -> Prix 25€ (standard)'],
     [501, 5, 'standard', 50, 'Distance 501 km -> Prix 50€ (standard)'],
-    
-    // Tests des frontières de poids (Distance 10km = base 10€)
     [10, 9, 'standard', 10, 'Poids 9 kg -> Prix 10€ (standard)'],
-    [10, 10, 'standard', 15, 'Poids 10 kg -> Prix 15€ (standard)'], // 10 + 50%
-    [10, 50, 'standard', 15, 'Poids 50 kg -> Prix 15€ (standard)'], // 10 + 50%
+    [10, 10, 'standard', 15, 'Poids 10 kg -> Prix 15€ (standard)'], 
+    [10, 50, 'standard', 15, 'Poids 50 kg -> Prix 15€ (standard)'],
   ];
 
-  // La syntaxe it.each parcourt notre tableau ligne par ligne
   it.each(validCases)(
     'Distance %i km, Poids %i kg (%s) -> Doit coûter %i€', 
     (distance, weight, type, expectedResult, description) => {
@@ -42,7 +39,6 @@ describe('Shipping Calculator - Tests Fonctionnels (Catalog-Based)', () => {
   it.each(errorCases)(
     'Entrée invalide: distance %i km, poids %i kg -> Doit lever une erreur',
     (distance, weight, type, description) => {
-      // Pour tester une erreur (throw), il faut l'envelopper dans une fonction fléchée
       expect(() => {
         calculateShipping(
           distance as number, 
