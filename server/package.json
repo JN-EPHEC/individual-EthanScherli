@@ -4,6 +4,8 @@
   "description": "",
   "main": "Node.js",
   "scripts": {
+    "start": "node dist/server.js",
+    "build": "tsc",
     "dev": "tsx watch src/server.ts",
     "test": "jest --verbose",
     "test:watch": "jest --watch",

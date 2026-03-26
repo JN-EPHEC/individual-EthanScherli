@@ -4,6 +4,7 @@ node_modules/
 # Environnement et Secrets
 .env
 .env.*
+.env.production
 
 # Fichiers de base de données locale
 database.sqlite

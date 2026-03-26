@@ -11,9 +11,12 @@ function App() {
   const [nouveauNom, setNouveauNom] = useState("");
   const [nouveauPrenom, setNouveauPrenom] = useState("");
 
+  // Utilisation de la variable d'environnement pour l'URL de l'API
+  const API_URL = import.meta.env.VITE_API_URL;
+
   const fetchUsers = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/users");
+      const response = await fetch(`${API_URL}/users`);
       const users = await response.json();
       setData(users);
     } catch (error) {
@@ -28,7 +31,7 @@ function App() {
   const addUser = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await fetch("http://localhost:3000/api/users", {
+      await fetch(`${API_URL}/users`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ nom: nouveauNom, prenom: nouveauPrenom })
@@ -44,7 +47,7 @@ function App() {
   const deleteUser = async (id: number) => {
     if (!window.confirm("Êtes-vous sûr ?")) return;
     try {
-      await fetch(`http://localhost:3000/api/users/${id}`, { method: 'DELETE' });
+      await fetch(`${API_URL}/users/${id}`, { method: 'DELETE' });
       fetchUsers();
     } catch (error) {
       console.error("Erreur effacement", error);
