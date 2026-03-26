@@ -1,1 +1,18 @@
-**/node_modules/
+# Dépendances
+node_modules/
+
+# Environnement et Secrets
+.env
+.env.*
+
+# Fichiers de base de données locale
+database.sqlite
+*.sqlite3
+
+# Dossiers générés (Build et Tests)
+dist/
+build/
+coverage/
+
+# Fichiers de l'éditeur de code (optionnel mais propre)
+.vscode/
